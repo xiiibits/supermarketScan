@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Main Page
+{% endblock %}
+
+{% block content %}
+
+<div class="entry">
+    <h1 class="header">Main Page</h1>
+    <form method="post" action="{{ url_for('scan_item') }}">
+        <label for="barcode">Scan Barcode:</label>
+        <input type="text" id="barcode" name="barcode" required>
+        <input type="submit" value="Add Item">
+    </form>
+</div>
+
+<h2>Current List</h2>
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Price (USD)</th>
+        <th>Price (LBP)</th>
+        <th>Action</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price_usd }}</td>
+        <td>{{ "{:,.0f}".format(item.price_usd * rate) }}</td>        
+        
+        <td>
+            <form method="post" action="{{ url_for('delete_item', item_index=loop.index0) }}" style="display: inline;">
+                <button type="submit">Delete</button>
+            </form>
+            
+            
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Total</h2>
+<p>Total (USD): {{ total_usd }}</p>
+<p>Total (LBP): {{ total_usd * rate }}</p>
+
+<button onclick="window.location.href='{{ url_for('new_list') }}'">New List</button>
+
+{% endblock %}

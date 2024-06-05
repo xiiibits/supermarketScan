@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+List Items
+{% endblock %}
+
+{% block content %}
+<h1>List Items</h1>
+<form method="post">
+    <label for="barcode">Barcode:</label><br>
+    <input type="text" id="barcode" name="barcode" required><br>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="price_usd">Price (USD):</label><br>
+    <input type="text" id="price_usd" name="price_usd" required><br><br>
+    <input type="submit" value="Add Item">
+</form>
+
+<h2>Current Items</h2>
+<table>
+    <tr>
+        <th>Barcode</th>
+        <th>Name</th>
+        <th>Price (USD)</th>
+        <th>Action</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.barcode }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price_usd }}</td>
+        <td>
+            <form method="post" action="{{ url_for('delete_database_item', item_id=item.id) }}" style="display:inline;">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

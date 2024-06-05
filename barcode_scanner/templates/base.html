@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;   
+        }
+        .navbar {
+            background-color: #799351;
+            width: 70%;
+            overflow: hidden;
+            margin: 0px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 0px 0px 40px 40px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 30px;
+            cursor : pointer;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .entry{
+            width: 100%;
+            background: A1DD70 ;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .header{
+            color: #799351;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="{{ url_for('main') }}">Main</a>
+            <a href="{{ url_for('list_items') }}">List</a>
+            <a href="{{ url_for('rate') }}">Rate</a>
+            <a href="{{ url_for('main') }}">Revenue</a>
+        </div>
+    </div>
+    
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
